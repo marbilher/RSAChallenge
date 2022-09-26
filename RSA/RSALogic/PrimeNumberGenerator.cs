@@ -58,13 +58,8 @@ namespace RSALogic
                 nextPrime += 2;
             }
             Random rnd = new Random();
-            int randomIndex = rnd.Next(lowerLimitIndex, primes.Count - 1);
+            int randomIndex = rnd.Next(lowerLimitIndex, primes.Count);
             return primes[randomIndex];
         }
     }
 }
-
-//easiest thing to do?
-//we have a list of primes from 2 to upper limit
-//we want a random value between lower and upper
-//i will have list count... i can store index of first greater than lower limit

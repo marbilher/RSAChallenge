@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace RSALogic
 {
     public class Program
     {
-        // Uncomment the following line to resolve.
-        static void Main() {}
+        static void Main() {
+            PrimeNumberGenerator primeGen = new PrimeNumberGenerator();
+            RSAReceiver receiver = new RSAReceiver(primeGen);
+            RSASender sender = new RSASender();
+            CommunicationLayer commLayer = new CommunicationLayer();            
+            commLayer.RegisterReceiver(receiver);
+            commLayer.BroadcastReceivers();
+            var targetAddress = commLayer.BroadcastReceiverAddress();
+            var targetAddressKeys = commLayer.BroadcastReceiverPublicKeys(targetAddress);
+            sender.sendMessage(targetAddress, targetAddressKeys, "A", commLayer);
+        }
     }
 }
